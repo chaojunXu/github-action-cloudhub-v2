@@ -40,6 +40,7 @@
 						<provider>MC</provider>
 						<environment>${deploy.env}</environment>
 						<target>${deploy.target}</target>
+						<server>anypoint-exchange-v3</server>
 						<muleVersion>${mule.deploy.verion}</muleVersion>
 						<connectedAppClientId>${anypoint.connAppClientID}</connectedAppClientId>
 						<connectedAppClientSecret>${anypoint.connAppClientSecret}</connectedAppClientSecret>
