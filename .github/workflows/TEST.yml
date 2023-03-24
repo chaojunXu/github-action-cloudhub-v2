@@ -34,7 +34,7 @@ jobs:
                       -Danypoint.connAppClientID=$CONNAPPCLIENTID \
                       -Danypoint.connAppClientSecret=$CONNAPPCLIENTSECRET \
                       -Dsecure.key=$KEY \
-                      -Ddeploy.app.env=dev \
+                      -Ddeploy.app.env=dev 
 
     
        
