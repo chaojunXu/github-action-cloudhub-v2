@@ -33,7 +33,8 @@ jobs:
           }]
           
     - name: Build with Maven and publish to Exchange
-      run: mvn deploy -DskipMunitTests -e
+      run: mvn deploy -DskipMunitTests -e \
+           -Danypoint.businessGroupId=$GROUPID
     
        
   deploy:
