@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>9bcea059-147d-47a3-9c05-e691c72d1f41</groupId>
+	<groupId>${anypoint.businessGroupId}</groupId>
 	<artifactId>github-action-cloudhub-v2</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>mule-application</packaging>
@@ -15,10 +17,10 @@
 
 		<app.runtime>4.4.0-20230217</app.runtime>
 		<mule.maven.plugin.version>3.8.1</mule.maven.plugin.version>
-		<munit.version>2.3.13</munit.version>
+		<munit.version>2.3.15</munit.version>
 		<anypoint.businessGroupId>9bcea059-147d-47a3-9c05-e691c72d1f41</anypoint.businessGroupId>
 		<mule.deploy.verion>4.4.0</mule.deploy.verion>
-		<deploy.publicURL/>
+		<deploy.publicURL />
 	</properties>
 
 	<build>
@@ -114,14 +116,20 @@
 		<dependency>
 			<groupId>com.mulesoft.munit</groupId>
 			<artifactId>munit-runner</artifactId>
-			<version>2.3.13</version>
+			<version>${munit.version}</version>
 			<classifier>mule-plugin</classifier>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.mulesoft.munit</groupId>
+			<artifactId>munit-remote</artifactId>
+			<version>${munit.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.mulesoft.munit</groupId>
 			<artifactId>munit-tools</artifactId>
-			<version>2.3.13</version>
+			<version>${munit.version}</version>
 			<classifier>mule-plugin</classifier>
 			<scope>test</scope>
 		</dependency>
@@ -159,8 +167,8 @@
 			</snapshots>
 		</pluginRepository>
 	</pluginRepositories>
-	
-		<distributionManagement>
+
+	<distributionManagement>
 		<repository>
 			<id>anypoint-exchange-v3</id>
 			<name>Exchange Private Repository</name>

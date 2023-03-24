@@ -1,12 +1,15 @@
 name: Build and Deploy to SEA-DEV
 
 on:
- workflow_dispatch: 
+ workflow_dispatch:
+ 
+env:
+  DEPLOYE_ENV: SEA-DEV 
   
 jobs:
   build:
     runs-on: ubuntu-latest
-    environment: SEA-DEV
+    environment: $DEPLOYE_ENV
     steps:
     - name: Checkout this repo
       uses: actions/checkout@v3
@@ -33,13 +36,13 @@ jobs:
           }]
           
     - name: Build with Maven and publish to Exchange
-      run: mvn deploy -e
+      run: mvn deploy -DskipMunitTests -e
     
        
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    environment: SEA-DEV
+    environment: $DEPLOYE_ENV
     steps:    
     - name: Checkout this repo
       uses: actions/checkout@v3
@@ -61,17 +64,22 @@ jobs:
           }]
     - name: Deploy to SEA-DEV
       env:
-        CONNAPPCLIENTID: ${{ secrets.conn_app_client_id }}
+        CONNAPPCLIENTID: ${{ vars.conn_app_client_id }}
         CONNAPPCLIENTSECRET: ${{ secrets.conn_app_client_secret }}
+        GROUPID: ${{ vars.business_group_id }}
         KEY: ${{ secrets.decryption_key }}
+        TARGET: ${{vars.deploy_target}}
+        REPLICAS: ${{vars.deploy_replicas}}
+        VCORES: ${{vars.deploy_vcores}}
       run: |
         mvn deploy -DskipMunitTests -DmuleDeploy  -e \
          -Danypoint.connAppClientID=$CONNAPPCLIENTID \
          -Danypoint.connAppClientSecret=$CONNAPPCLIENTSECRET \
-         -Ddeploy.env=SEA-DEV \
-         -Ddeploy.target=Cloudhub-US-East-2 \
-         -Ddeploy.replicas=1 \
-         -Ddeploy.vCores=0.2 \
+         -Danypoint.businessGroupId=$GROUPID
+         -Ddeploy.env=$DEPLOYE_ENV \
+         -Ddeploy.target=$TARGET \
+         -Ddeploy.replicas=$REPLICAS \
+         -Ddeploy.vCores=$VCORES \
          -Ddeploy.encryption.key=$KEY
 
 
