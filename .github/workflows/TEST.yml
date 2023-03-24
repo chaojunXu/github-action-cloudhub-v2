@@ -27,17 +27,14 @@ jobs:
       env:
         nexus_username: ${{ secrets.nexus_username }}
         nexus_password: ${{ secrets.nexus_password }}
+        conn_app_client_id: ${{ vars.conn_app_client_id }}
+        conn_app_client_secret: ${{ secrets.conn_app_client_secret }}
         KEY: ${{ secrets.decryption_key }}
-        CONNAPPCLIENTID: ${{ vars.conn_app_client_id }}
-        CONNAPPCLIENTSECRET: ${{ secrets.conn_app_client_secret }}
       run: mvn deploy -DskipMunitTests --settings .maven/settings.xml \
-                      -Danypoint.connAppClientID=$CONNAPPCLIENTID \
-                      -Danypoint.connAppClientSecret=$CONNAPPCLIENTSECRET \
                       -Dsecure.key=$KEY \
                       -Ddeploy.app.env=dev 
 
     
-       
   deploy:
     needs: build
     runs-on: ubuntu-latest
