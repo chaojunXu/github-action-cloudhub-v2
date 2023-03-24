@@ -9,6 +9,7 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 		<http:listener-connection host="0.0.0.0" port="8081" />
 	</http:listener-config>
 	<configuration-properties doc:name="Configuration properties" doc:id="0f1421ea-fd9a-46c0-a172-ed462452868b" file="${app.env}.yaml" />
+	<global-property doc:name="Global Property" doc:id="3f410254-47ef-465d-b09c-0377fee29586" name="app.env" value="qa" />
 	<flow name="github-action-cloudhub-v2Flow" doc:id="757f8fdf-2e84-4262-a58d-320fde677ba8" >
 		<http:listener doc:name="Listener" doc:id="0cdb42f5-7ecd-4276-805d-4a5daeaa92ca" config-ref="HTTP_Listener_config" path="/test"/>
 		<ee:transform doc:name="Transform Message" doc:id="7e432c8a-0d62-4e74-ad9f-52d055e77500" >
