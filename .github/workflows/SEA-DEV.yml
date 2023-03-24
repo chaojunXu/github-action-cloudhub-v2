@@ -65,10 +65,10 @@ jobs:
         CONNAPPCLIENTSECRET: ${{ secrets.conn_app_client_secret }}
         GROUPID: ${{ vars.business_group_id }}
         KEY: ${{ secrets.decryption_key }}
-        TARGET: ${{vars.deploy_target}}
-        ENV: ${{vars.deploy_env}}
-        REPLICAS: ${{vars.deploy_replicas}}
-        VCORES: ${{vars.deploy_vcores}}
+        TARGET: ${{ vars.deploy_target }}
+        ENV: ${{ vars.deploy_env }}
+        REPLICAS: ${{ vars.deploy_replicas }}
+        VCORES: ${{ vars.deploy_vcores }}
       run: |
         mvn deploy -DskipMunitTests -DmuleDeploy  -e \
          -Danypoint.connAppClientID=$CONNAPPCLIENTID \
