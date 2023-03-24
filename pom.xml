@@ -58,7 +58,7 @@
 						</deploymentSettings>
 						<properties>
 							<secure.key>${deploy.encryption.key}</secure.key>
-							<env.properties>${deploy.env.properties}</env.properties>
+							<app.env>${deploy.app.env}</app.env>
 						</properties>
 						<integrations>
 							<services>
