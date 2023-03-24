@@ -2,14 +2,11 @@ name: Build and Deploy to SEA-DEV
 
 on:
  workflow_dispatch:
- 
-env:
-  DEPLOYE_ENV: SEA-DEV 
   
 jobs:
   build:
     runs-on: ubuntu-latest
-    environment: $DEPLOYE_ENV
+    environment: SEA-DEV
     steps:
     - name: Checkout this repo
       uses: actions/checkout@v3
@@ -42,7 +39,7 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    environment: $DEPLOYE_ENV
+    environment: SEA-DEV
     steps:    
     - name: Checkout this repo
       uses: actions/checkout@v3
@@ -69,6 +66,7 @@ jobs:
         GROUPID: ${{ vars.business_group_id }}
         KEY: ${{ secrets.decryption_key }}
         TARGET: ${{vars.deploy_target}}
+        ENV: ${{vars.deploy_env}}
         REPLICAS: ${{vars.deploy_replicas}}
         VCORES: ${{vars.deploy_vcores}}
       run: |
@@ -76,7 +74,7 @@ jobs:
          -Danypoint.connAppClientID=$CONNAPPCLIENTID \
          -Danypoint.connAppClientSecret=$CONNAPPCLIENTSECRET \
          -Danypoint.businessGroupId=$GROUPID
-         -Ddeploy.env=$DEPLOYE_ENV \
+         -Ddeploy.env=$ENV \
          -Ddeploy.target=$TARGET \
          -Ddeploy.replicas=$REPLICAS \
          -Ddeploy.vCores=$VCORES \
