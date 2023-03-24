@@ -8,7 +8,6 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="ab65fc37-2693-44ef-9765-6d831d0333c2" >
 		<http:listener-connection host="0.0.0.0" port="8081" />
 	</http:listener-config>
-	<global-property doc:name="Global Property" doc:id="8f350321-699c-4c42-b90e-748d5d6754c6" name="env" value="qa" />
 	<configuration-properties doc:name="Configuration properties" doc:id="0f1421ea-fd9a-46c0-a172-ed462452868b" file="${env}.yaml" />
 	<flow name="github-action-cloudhub-v2Flow" doc:id="757f8fdf-2e84-4262-a58d-320fde677ba8" >
 		<http:listener doc:name="Listener" doc:id="0cdb42f5-7ecd-4276-805d-4a5daeaa92ca" config-ref="HTTP_Listener_config" path="/test"/>
@@ -19,7 +18,7 @@ import p from Mule
 
 output text/plain
 ---
-"Hello World!" ++ p('env')]]></ee:set-payload>
+"Hello World!" ++ p('my')]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
 	</flow>
