@@ -58,7 +58,7 @@ jobs:
         REPLICAS: ${{ vars.deploy_replicas }}
         VCORES: ${{ vars.deploy_vcores }}
       run: |
-        mvn deploy -DskipMunitTests -DmuleDeploy  -e \
+        mvn deploy -DskipMunitTests -DmuleDeploy  --settings .maven/settings.xml  -e \
          -Danypoint.connAppClientID=$CONNAPPCLIENTID \
          -Danypoint.connAppClientSecret=$CONNAPPCLIENTSECRET \
          -Ddeploy.env=$ENV \
