@@ -33,7 +33,7 @@ jobs:
           }]
           
     - name: Build with Maven and publish to Exchange
-      run: mvn deploy -DskipMunitTests -e
+      run: mvn deploy -e
     
        
   deploy:
