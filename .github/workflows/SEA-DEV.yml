@@ -32,7 +32,7 @@ jobs:
           [{
            "id": "anypoint-exchange-v3",
            "username": "~~~Client~~~",
-           "password": "${{ secrets.conn_app_client_id }}~?~${{ secrets.conn_app_client_secret }}"
+           "password": "${{ vars.conn_app_client_id }}~?~${{ secrets.conn_app_client_secret }}"
           }]
           
     - name: Build with Maven and publish to Exchange
@@ -60,7 +60,7 @@ jobs:
           [{
            "id": "anypoint-exchange-v3",
            "username": "~~~Client~~~",
-           "password": "${{ secrets.conn_app_client_id }}~?~${{ secrets.conn_app_client_secret }}"
+           "password": "${{ vars.conn_app_client_id }}~?~${{ secrets.conn_app_client_secret }}"
           }]
     - name: Deploy to SEA-DEV
       env:
