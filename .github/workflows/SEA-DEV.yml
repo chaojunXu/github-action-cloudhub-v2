@@ -79,6 +79,7 @@ jobs:
          -Danypoint.connAppClientID=$CONNAPPCLIENTID \
          -Danypoint.connAppClientSecret=$CONNAPPCLIENTSECRET \
          -Ddeploy.env=$ENV \
+         -Ddeploy.encryption.key=$KEY \
          -Ddeploy.target=$TARGET \
          -Ddeploy.replicas=$REPLICAS \
          -Ddeploy.vCores=$VCORES \
