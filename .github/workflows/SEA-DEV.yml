@@ -34,7 +34,12 @@ jobs:
           ]
           
     - name: Build with Maven and publish to Exchange
-      run: mvn deploy --settings .maven/settings.xml -e
+      env:
+        nexus_username: ${{ secrets.nexus_username }}
+        nexus_password: ${{ secrets.nexus_password }}
+        KEY: ${{ secrets.decryption_key }}
+      run: mvn deploy -DskipMunitTests --settings .maven/settings.xml -Dsecure.key="$KEY"
+
     
        
   deploy:
@@ -78,7 +83,6 @@ jobs:
          -Ddeploy.target=$TARGET \
          -Ddeploy.replicas=$REPLICAS \
          -Ddeploy.vCores=$VCORES \
-         -Ddeploy.encryption.key=$KEY \
          -Ddeploy.app.env=dev
 
 
