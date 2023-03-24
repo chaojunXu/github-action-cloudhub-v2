@@ -22,23 +22,19 @@ jobs:
       with:
         java-version: 8
         distribution: zulu
-    - name: Add repo credentials
-      uses: s4u/maven-settings-action@v2.8.0
-      with:
-        servers: |
-          [{
-           "id": "anypoint-exchange-v3",
-           "username": "~~~Client~~~",
-           "password": "${{ vars.conn_app_client_id }}~?~${{ secrets.conn_app_client_secret }}"
-          }
-          ]
           
     - name: Build with Maven and publish to Exchange
       env:
         nexus_username: ${{ secrets.nexus_username }}
         nexus_password: ${{ secrets.nexus_password }}
         KEY: ${{ secrets.decryption_key }}
-      run: mvn deploy -DskipMunitTests --settings .maven/settings.xml -Dsecure.key="$KEY"
+        CONNAPPCLIENTID: ${{ vars.conn_app_client_id }}
+        CONNAPPCLIENTSECRET: ${{ secrets.conn_app_client_secret }}
+      run: mvn deploy -DskipMunitTests --settings .maven/settings.xml \
+                      -Danypoint.connAppClientID=$CONNAPPCLIENTID \
+                      -Danypoint.connAppClientSecret=$CONNAPPCLIENTSECRET \
+                      -Dsecure.key=$KEY \
+                      -Ddeploy.app.env=dev \
 
     
        
@@ -56,15 +52,7 @@ jobs:
         key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
         restore-keys: |
           ${{ runner.os }}-maven-
-    - name: Add repo credentials
-      uses: s4u/maven-settings-action@v2.8.0
-      with:
-        servers: |
-          [{
-           "id": "anypoint-exchange-v3",
-           "username": "~~~Client~~~",
-           "password": "${{ vars.conn_app_client_id }}~?~${{ secrets.conn_app_client_secret }}"
-          }]
+
     - name: Deploy to SEA-DEV
       env:
         CONNAPPCLIENTID: ${{ vars.conn_app_client_id }}
