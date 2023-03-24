@@ -30,7 +30,7 @@ jobs:
            "id": "anypoint-exchange-v3",
            "username": "~~~Client~~~",
            "password": "${{ vars.conn_app_client_id }}~?~${{ secrets.conn_app_client_secret }}"
-          }
+          },
           {
            "id": "MuleRepository",
            "username": "~~~Client~~~",
