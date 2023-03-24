@@ -33,7 +33,7 @@ jobs:
           }]
           
     - name: Build with Maven and publish to Exchange
-      run: mvn deploy -DskipMunitTests -e -Danypoint.businessGroupId=${{ vars.business_group_id }}
+      run: mvn deploy -DskipMunitTests -e
     
        
   deploy:
@@ -73,7 +73,6 @@ jobs:
         mvn deploy -DskipMunitTests -DmuleDeploy  -e \
          -Danypoint.connAppClientID=$CONNAPPCLIENTID \
          -Danypoint.connAppClientSecret=$CONNAPPCLIENTSECRET \
-         -Danypoint.businessGroupId=$GROUPID
          -Ddeploy.env=$ENV \
          -Ddeploy.target=$TARGET \
          -Ddeploy.replicas=$REPLICAS \
