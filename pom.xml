@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>a3e03bf4-af3a-4d32-b07d-efbcd5cdc776</groupId>
+	<groupId>9bcea059-147d-47a3-9c05-e691c72d1f41</groupId>
 	<artifactId>github-action-cloudhub-v2</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>mule-application</packaging>
@@ -18,7 +18,7 @@
 		<app.runtime>4.4.0-20230217</app.runtime>
 		<mule.maven.plugin.version>3.8.1</mule.maven.plugin.version>
 		<munit.version>2.3.15</munit.version>
-		<anypoint.businessGroupId>a3e03bf4-af3a-4d32-b07d-efbcd5cdc776</anypoint.businessGroupId>
+		<anypoint.businessGroupId>9bcea059-147d-47a3-9c05-e691c72d1f41</anypoint.businessGroupId>
 		<mule.deploy.verion>4.4.0</mule.deploy.verion>
 		<deploy.publicURL />
 	</properties>
@@ -58,6 +58,7 @@
 						</deploymentSettings>
 						<properties>
 							<secure.key>${deploy.encryption.key}</secure.key>
+							<env.properties>${deploy.env.properties}</env.properties>
 						</properties>
 						<integrations>
 							<services>
@@ -153,6 +154,18 @@
 			<name>MuleSoft Releases Repository</name>
 			<url>https://repository.mulesoft.org/releases/</url>
 			<layout>default</layout>
+		</repository>
+		<repository>
+			<id>MuleRepository</id>
+			<name>MuleRepository</name>
+			<url>https://repository.mulesoft.org/nexus-ee/content/repositories/releases-ee/</url>
+			<layout>default</layout>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
 		</repository>
 	</repositories>
 
