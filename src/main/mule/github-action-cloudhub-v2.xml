@@ -19,7 +19,7 @@ import p from Mule
 
 output text/plain
 ---
-"Hello World!" ++ p('my')]]></ee:set-payload>
+"Hello World!"]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
 	</flow>
