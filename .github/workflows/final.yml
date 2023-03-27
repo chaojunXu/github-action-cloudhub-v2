@@ -25,12 +25,15 @@ jobs:
           
     - name: Build with Maven and publish to Exchange
       env:
-        nexus_username: ${{ secrets.nexus_username }}
+        nexus_username: ${{ vars.nexus_username }}
         nexus_password: ${{ secrets.nexus_password }}
         conn_app_client_id: ${{ vars.conn_app_client_id }}
         conn_app_client_secret: ${{ secrets.conn_app_client_secret }}
         KEY: ${{ secrets.decryption_key }}
-      run: mvn deploy -DskipMunitTests --settings .maven/settings.xml -e -Ddeploy.encryption.key=$KEY -Ddeploy.app.env=dev 
+      run: |
+        mvn deploy --settings .maven/settings.xml -e \
+                   -Ddeploy.encryption.key=$KEY \
+                   -Ddeploy.app.env=dev 
 
     
   deploy:
@@ -61,11 +64,11 @@ jobs:
         mvn deploy -DskipMunitTests -DmuleDeploy  --settings .maven/settings.xml  -e \
          -Danypoint.connAppClientID=$CONNAPPCLIENTID \
          -Danypoint.connAppClientSecret=$CONNAPPCLIENTSECRET \
-         -Ddeploy.env=$ENV \
-         -Ddeploy.encryption.key=$KEY \
+         -Ddeploy.env=$ENV \        
          -Ddeploy.target=$TARGET \
          -Ddeploy.replicas=$REPLICAS \
          -Ddeploy.vCores=$VCORES \
+         -Ddeploy.encryption.key=$KEY \
          -Ddeploy.app.env=dev
 
 
