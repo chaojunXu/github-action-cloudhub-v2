@@ -18,7 +18,6 @@
 		<app.runtime>4.4.0-20230217</app.runtime>
 		<mule.maven.plugin.version>3.8.1</mule.maven.plugin.version>
 		<munit.version>2.3.15</munit.version>
-		<anypoint.businessGroupId>9bcea059-147d-47a3-9c05-e691c72d1f41</anypoint.businessGroupId>
 		<mule.deploy.verion>4.4.0</mule.deploy.verion>
 		<deploy.publicURL />
 	</properties>
@@ -47,8 +46,8 @@
 						<connectedAppClientId>${anypoint.connAppClientID}</connectedAppClientId>
 						<connectedAppClientSecret>${anypoint.connAppClientSecret}</connectedAppClientSecret>
 						<connectedAppGrantType>client_credentials</connectedAppGrantType>
-						<applicationName>${cloudhub.application.name}</applicationName>
-						<businessGroupId>${anypoint.businessGroupId}</businessGroupId>
+						<applicationName>${project.name}</applicationName>
+						<businessGroupId>${project.groupId}</businessGroupId>
 						<replicas>${deploy.replicas}</replicas>
 						<vCores>${deploy.vCores}</vCores>
 						<deploymentSettings>
@@ -185,7 +184,7 @@
 		<repository>
 			<id>anypoint-exchange-v3</id>
 			<name>Exchange Private Repository</name>
-			<url>https://maven.anypoint.mulesoft.com/api/v3/organizations/${anypoint.businessGroupId}/maven</url>
+			<url>https://maven.anypoint.mulesoft.com/api/v3/organizations/${project.groupId}/maven</url>
 			<layout>default</layout>
 		</repository>
 	</distributionManagement>
