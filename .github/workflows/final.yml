@@ -69,4 +69,5 @@ jobs:
                     -Ddeploy.replicas=$REPLICAS \
                     -Ddeploy.vCores=$VCORES \
                     -Ddeploy.encryption.key=$KEY \
-                    -Ddeploy.app.env=dev
+                    -Ddeploy.app.env=dev \
+                    -Ddeploy.country=th

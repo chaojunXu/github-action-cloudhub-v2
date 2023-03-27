@@ -46,7 +46,7 @@
 						<connectedAppClientId>${anypoint.connAppClientID}</connectedAppClientId>
 						<connectedAppClientSecret>${anypoint.connAppClientSecret}</connectedAppClientSecret>
 						<connectedAppGrantType>client_credentials</connectedAppGrantType>
-						<applicationName>${project.name}</applicationName>
+						<applicationName>${deploy.country}-${project.name}</applicationName>
 						<businessGroupId>${project.groupId}</businessGroupId>
 						<replicas>${deploy.replicas}</replicas>
 						<vCores>${deploy.vCores}</vCores>
