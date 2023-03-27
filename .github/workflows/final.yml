@@ -61,14 +61,12 @@ jobs:
         REPLICAS: ${{ vars.deploy_replicas }}
         VCORES: ${{ vars.deploy_vcores }}
       run: |
-        mvn deploy -DmuleDeploy -DskipMunitTests --settings .maven/settings.xml -e \
-         -Danypoint.connAppClientID=$CONNAPPCLIENTID \
-         -Danypoint.connAppClientSecret=$CONNAPPCLIENTSECRET \
-         -Ddeploy.env=$ENV \        
-         -Ddeploy.target=$TARGET \
-         -Ddeploy.replicas=$REPLICAS \
-         -Ddeploy.vCores=$VCORES \
-         -Ddeploy.encryption.key=$KEY \
-         -Ddeploy.app.env=dev
-
-
+         mvn deploy -DmuleDeploy -DskipMunitTests --settings .maven/settings.xml -e \
+                    -Danypoint.connAppClientID=$CONNAPPCLIENTID \
+                    -Danypoint.connAppClientSecret=$CONNAPPCLIENTSECRET \
+                    -Ddeploy.env=$ENV \
+                    -Ddeploy.target=$TARGET \
+                    -Ddeploy.replicas=$REPLICAS \
+                    -Ddeploy.vCores=$VCORES \
+                    -Ddeploy.encryption.key=$KEY \
+                    -Ddeploy.app.env=dev
