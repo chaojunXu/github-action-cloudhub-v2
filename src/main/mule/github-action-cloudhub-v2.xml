@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
-	xmlns="http://www.mulesoft.org/schema/mule/core"
-	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+<mule xmlns:os="http://www.mulesoft.org/schema/mule/os" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
-http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/os http://www.mulesoft.org/schema/mule/os/current/mule-os.xsd">
 	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="ab65fc37-2693-44ef-9765-6d831d0333c2" >
 		<http:listener-connection host="0.0.0.0" port="8081" />
 	</http:listener-config>
 	<configuration-properties doc:name="Configuration properties" doc:id="0f1421ea-fd9a-46c0-a172-ed462452868b" file="${app.env}.yaml" />
 	<global-property doc:name="Global Property" doc:id="3f410254-47ef-465d-b09c-0377fee29586" name="app.env" value="qa" />
+	<os:object-store name="test" doc:name="Object store" doc:id="4cc6604b-3498-4b54-bf68-4b8f82514b24" maxEntries="100" entryTtl="1" entryTtlUnit="HOURS" />
 	<flow name="github-action-cloudhub-v2Flow" doc:id="757f8fdf-2e84-4262-a58d-320fde677ba8" >
 		<http:listener doc:name="Listener" doc:id="0cdb42f5-7ecd-4276-805d-4a5daeaa92ca" config-ref="HTTP_Listener_config" path="/test"/>
 		<ee:transform doc:name="Transform Message" doc:id="7e432c8a-0d62-4e74-ad9f-52d055e77500" >
@@ -20,6 +22,23 @@ import p from Mule
 output text/plain
 ---
 "Hello World!"]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<os:store doc:name="Store" doc:id="e08068e7-a4e8-4f7e-9edb-051f723e80ea" key="key" objectStore="test"/>
+	</flow>
+	<flow name="github-action-cloudhub-v2Flow1" doc:id="6cda4659-2aa7-46f7-b101-a94cab38c30f" >
+		<scheduler doc:name="Scheduler" doc:id="f5b2d569-072e-4c95-a87f-1a2d13e1bf73" >
+			<scheduling-strategy >
+				<fixed-frequency frequency="1" timeUnit="HOURS"/>
+			</scheduling-strategy>
+		</scheduler>
+		<ee:transform doc:name="Transform Message" doc:id="1efec9f5-da72-458c-a59a-d438619b619b" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+---
+{
+}]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
 	</flow>
