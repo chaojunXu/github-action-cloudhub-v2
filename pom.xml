@@ -4,7 +4,7 @@
 
 	<groupId>9bcea059-147d-47a3-9c05-e691c72d1f41</groupId>
 	<artifactId>github-action-cloudhub-v2</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.1-SNAPSHOT</version>
 	<packaging>mule-application</packaging>
 
 	<name>github-action-cloudhub-v2</name>
