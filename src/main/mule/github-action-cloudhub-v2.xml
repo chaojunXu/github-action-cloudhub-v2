@@ -21,23 +21,7 @@ import p from Mule
 
 output text/plain
 ---
-"Hello World!" ++ (attributes.queryParams.code default "no code")]]></ee:set-payload>
-			</ee:message>
-		</ee:transform>
-	</flow>
-	<flow name="github-action-cloudhub-v2Flow1" doc:id="6cda4659-2aa7-46f7-b101-a94cab38c30f" >
-		<scheduler doc:name="Scheduler" doc:id="f5b2d569-072e-4c95-a87f-1a2d13e1bf73" >
-			<scheduling-strategy >
-				<cron expression="0 0 10,14,16 * * ? " />
-			</scheduling-strategy>
-		</scheduler>
-		<ee:transform doc:name="Transform Message" doc:id="1efec9f5-da72-458c-a59a-d438619b619b" >
-			<ee:message >
-				<ee:set-payload ><![CDATA[%dw 2.0
-output application/java
----
-{
-}]]></ee:set-payload>
+"Hello World!"]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
 	</flow>
