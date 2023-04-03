@@ -31,7 +31,7 @@ jobs:
         conn_app_client_secret: ${{ secrets.conn_app_client_secret }}
         KEY: ${{ secrets.encryption_key }}
       run: |
-        mvn deploy -DskipMunitTests --settings .maven/settings.xml -e \
+        mvn deploy  --settings .maven/settings.xml -e \
                    -Ddeploy.encryption.key=$KEY \
                    -Ddeploy.app.env=dev 
 
