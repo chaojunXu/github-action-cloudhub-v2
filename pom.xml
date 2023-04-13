@@ -54,13 +54,13 @@
 						</deploymentSettings>
 						<properties>
 							<app.env>${deploy.app.env}</app.env>
-							<anypoint.platform.client_id>${deploy.env.client_id}</anypoint.platform.client_id>
+							<anypoint.platform.client_id>${deploy.env.clientId}</anypoint.platform.client_id>
 							<anypoint.platform.base_uri>https://anypoint.mulesoft.com/</anypoint.platform.base_uri>
 							<anypoint.platform.analytics_base_uri>https://analytics-ingest.anypoint.mulesoft.com/</anypoint.platform.analytics_base_uri>
 						</properties>
 						<secureProperties>
 							<secure.key>${deploy.encryption.key}</secure.key>
-							<anypoint.platform.client_secret>${deploy.env.client_secret}</anypoint.platform.client_secret>
+							<anypoint.platform.client_secret>${deploy.env.clientSecret}</anypoint.platform.client_secret>
 						</secureProperties>
 						<integrations>
 							<services>
