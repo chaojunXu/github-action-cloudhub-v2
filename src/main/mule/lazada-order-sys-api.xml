@@ -128,8 +128,11 @@ output application/json
                 <ee:set-payload><![CDATA[%dw 2.0
 output application/json
 ---
-"\"{\"msgType\": \"order\"}\""]]></ee:set-payload>
+{
+	dev: Mule:p('app.env')
+}]]></ee:set-payload>
             </ee:message>
         </ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="325aeba7-092e-4141-9996-fa0a84484a8e" message="#[output application/json&#10;import p from Mule&#10;---&#10;{&#10;    environment: p('app.env'),&#10;    applicationName: app.name,&#10;    applicationVersion: &quot;1.0.0&quot;,&#10;    location: {&#10;        flowName: flow.name&#10;    },&#10;    correlationId: correlationId,&#10;    timestamp: now(),&#10;    tracePoint: &quot;START&quot;,&#10;    level: &quot;INFO&quot;,&#10;    category: &quot;com.lvmh.logger.category.technical&quot;,&#10;    businessProcess: &quot;inventory&quot;,&#10;    message: &quot;start inventory &quot;,&#10;    content: {&#10;             test: &quot;aaa&quot;&#10;    }&#10;}]"/>
     </flow>
 </mule>
