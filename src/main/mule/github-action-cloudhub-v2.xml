@@ -13,16 +13,7 @@ http://www.mulesoft.org/schema/mule/os http://www.mulesoft.org/schema/mule/os/cu
 	<global-property doc:name="Global Property" doc:id="3f410254-47ef-465d-b09c-0377fee29586" name="app.env" value="qa" />
 	<os:object-store name="test" doc:name="Object store" doc:id="4cc6604b-3498-4b54-bf68-4b8f82514b24" maxEntries="100" entryTtl="1" entryTtlUnit="HOURS" />
 	<flow name="github-action-cloudhub-v2Flow" doc:id="757f8fdf-2e84-4262-a58d-320fde677ba8" >
-		<http:listener doc:name="Listener" doc:id="0cdb42f5-7ecd-4276-805d-4a5daeaa92ca" config-ref="HTTP_Listener_config" path="/test"/>
-		<ee:transform doc:name="Transform Message" doc:id="7e432c8a-0d62-4e74-ad9f-52d055e77500" >
-			<ee:message >
-				<ee:set-payload ><![CDATA[%dw 2.0
-import p from Mule
-
-output text/plain
----
-"Hello World!"]]></ee:set-payload>
-			</ee:message>
-		</ee:transform>
+		<http:listener doc:name="Listener" doc:id="58d76239-bfd9-4117-984a-24b21150acdf" config-ref="HTTP_Listener_config" path="/test"/>
+		<logger level="INFO" doc:name="Logger" doc:id="c551246c-3757-4419-b51a-6aff273d69ae" message="#[payload]" />
 	</flow>
 </mule>

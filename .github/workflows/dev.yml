@@ -22,26 +22,20 @@ jobs:
       with:
         java-version: 8
         distribution: zulu
-    - name: Add repo credentials
-      uses: s4u/maven-settings-action@v2.8.0
-      with:
-        servers: |
-          [{
-           "id": "anypoint-exchange-v3",
-           "username": "~~~Client~~~",
-           "password": "${{ vars.conn_app_client_id }}~?~${{ secrets.conn_app_client_secret }}"
-          }
-          ]
           
     - name: Build with Maven and publish to Exchange
       env:
-        nexus_username: ${{ secrets.nexus_username }}
+        nexus_username: ${{ vars.nexus_username }}
         nexus_password: ${{ secrets.nexus_password }}
-        KEY: ${{ secrets.decryption_key }}
-      run: mvn deploy --settings .maven/settings.xml -e -deploy.encryption.key="$KEY"
+        conn_app_client_id: ${{ vars.conn_app_client_id }}
+        conn_app_client_secret: ${{ secrets.conn_app_client_secret }}
+        KEY: ${{ secrets.encryption_key }}
+      run: |
+        mvn deploy  --settings .maven/settings.xml -e \
+                   -Ddeploy.encryption.key=$KEY \
+                   -Ddeploy.app.env=dev 
 
     
-       
   deploy:
     needs: build
     runs-on: ubuntu-latest
@@ -56,33 +50,28 @@ jobs:
         key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
         restore-keys: |
           ${{ runner.os }}-maven-
-    - name: Add repo credentials
-      uses: s4u/maven-settings-action@v2.8.0
-      with:
-        servers: |
-          [{
-           "id": "anypoint-exchange-v3",
-           "username": "~~~Client~~~",
-           "password": "${{ vars.conn_app_client_id }}~?~${{ secrets.conn_app_client_secret }}"
-          }]
+
     - name: Deploy to SEA-DEV
       env:
         CONNAPPCLIENTID: ${{ vars.conn_app_client_id }}
         CONNAPPCLIENTSECRET: ${{ secrets.conn_app_client_secret }}
-        KEY: ${{ secrets.decryption_key }}
+        KEY: ${{ secrets.encryption_key }}
         TARGET: ${{ vars.deploy_target }}
         ENV: ${{ vars.deploy_env }}
         REPLICAS: ${{ vars.deploy_replicas }}
         VCORES: ${{ vars.deploy_vcores }}
+        ENVCLIENTID: ${{ vars.env_client_id }}
+        ENVCLIENTSECRET:  ${{ secrets.env_client_secret }}
       run: |
-        mvn deploy -DskipMunitTests -DmuleDeploy  -e \
-         -Danypoint.connAppClientID=$CONNAPPCLIENTID \
-         -Danypoint.connAppClientSecret=$CONNAPPCLIENTSECRET \
-         -Ddeploy.env=$ENV \
-         -Ddeploy.encryption.key=$KEY \
-         -Ddeploy.target=$TARGET \
-         -Ddeploy.replicas=$REPLICAS \
-         -Ddeploy.vCores=$VCORES \
-         -Ddeploy.app.env=dev
-
-
+         mvn deploy -DmuleDeploy -DskipMunitTests --settings .maven/settings.xml -e \
+                    -Danypoint.connAppClientID=$CONNAPPCLIENTID \
+                    -Danypoint.connAppClientSecret=$CONNAPPCLIENTSECRET \
+                    -Ddeploy.env.clientId=$ENVCLIENTID \
+                    -Ddeploy.env.clientSecret=$ENVCLIENTSECRET \
+                    -Ddeploy.env=$ENV \
+                    -Ddeploy.target=$TARGET \
+                    -Ddeploy.replicas=$REPLICAS \
+                    -Ddeploy.vCores=$VCORES \
+                    -Ddeploy.encryption.key=$KEY \
+                    -Ddeploy.app.env=dev \
+                    -Ddeploy.country=th
