@@ -4,13 +4,13 @@ on:
  workflow_dispatch:
  
 env:
-  environment: SEA-DEV
-  app_env: dev
+  ENVIRONMENT: SEA-DEV
+  APP_ENV: dev
   
 jobs:
   build:
     runs-on: ubuntu-latest
-    environment: "${{ env.environment }}"
+    environment: ${{ env.ENVIRONMENT }}
     steps:
     - name: Checkout this repo
       uses: actions/checkout@v3
@@ -37,13 +37,13 @@ jobs:
       run: |
         mvn deploy  --settings .maven/settings.xml -e \
                    -Ddeploy.encryption.key=$KEY \
-                   -Ddeploy.app.env=${{ env.app_env }}
+                   -Ddeploy.app.env= ${{ env.APP_ENV }}
 
     
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    environment: "${{ env.environment }}"
+    environment: ${{ env.ENVIRONMENT }}
     steps:    
     - name: Checkout this repo
       uses: actions/checkout@v3
