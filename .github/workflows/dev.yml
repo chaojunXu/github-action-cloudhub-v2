@@ -1,16 +1,19 @@
 name: Build and Deploy to SEA-DEV
 
-env:
-  ENVIRONMENT: SEA-DEV
-  APP_ENV: dev 
+
  
 on:
   workflow_dispatch: 
- 
+
+env:
+  APP_ENV: dev
+matrix:
+  environment: [SEA-DEV]
+   
 jobs:
   build:
     runs-on: ubuntu-latest
-    environment: $ENVIRONMENT
+    environment: ${{ matrix.environment }}
     steps:
     - name: Checkout this repo
       uses: actions/checkout@v3
@@ -43,7 +46,7 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    environment: $ENVIRONMENT
+    environment: ${{ matrix.environment }}
     steps:    
     - name: Checkout this repo
       uses: actions/checkout@v3
