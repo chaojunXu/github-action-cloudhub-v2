@@ -10,7 +10,7 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-    environment: ${{ env.environment }
+    environment: ${{ env.environment }}
     steps:
     - name: Checkout this repo
       uses: actions/checkout@v3
@@ -37,7 +37,7 @@ jobs:
       run: |
         mvn deploy  --settings .maven/settings.xml -e \
                    -Ddeploy.encryption.key=$KEY \
-                   -Ddeploy.app.env=${{ env.app_env } 
+                   -Ddeploy.app.env=${{ env.app_env }}
 
     
   deploy:
@@ -77,5 +77,5 @@ jobs:
                     -Ddeploy.replicas=$REPLICAS \
                     -Ddeploy.vCores=$VCORES \
                     -Ddeploy.encryption.key=$KEY \
-                    -Ddeploy.app.env=${{ env.app_env } \
+                    -Ddeploy.app.env=${{ env.app_env }} \
                     -Ddeploy.country=th
