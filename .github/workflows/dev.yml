@@ -1,7 +1,7 @@
 name: Build and Deploy to SEA-DEV
  
 on:
-  workflow_dispatch:
+  workflow_dispatch: 
 
 env:
   ENVIRONMENT: SEA-DEV
