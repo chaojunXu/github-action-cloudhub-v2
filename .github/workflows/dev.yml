@@ -38,7 +38,7 @@ jobs:
       run: |
         mvn deploy  --settings .maven/settings.xml -e \
                    -Ddeploy.encryption.key=$KEY \
-                   -Ddeploy.app.env= ${{ env.APP_ENV }}
+                   -Ddeploy.app.env=${{ env.APP_ENV }}
 
     
   deploy:
