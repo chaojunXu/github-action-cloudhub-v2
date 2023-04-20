@@ -7,13 +7,11 @@ on:
 
 env:
   APP_ENV: dev
-matrix:
-  environment: [SEA-DEV]
-   
+
 jobs:
   build:
     runs-on: ubuntu-latest
-    environment: ${{ matrix.environment }}
+    environment: SEA-DEV
     steps:
     - name: Checkout this repo
       uses: actions/checkout@v3
@@ -46,7 +44,7 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    environment: ${{ matrix.environment }}
+    environment: SEA-DEV
     steps:    
     - name: Checkout this repo
       uses: actions/checkout@v3
