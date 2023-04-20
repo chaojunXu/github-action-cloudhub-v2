@@ -1,12 +1,12 @@
 name: Build and Deploy to SEA-DEV
- 
-on:
-  workflow_dispatch: 
 
 env:
   ENVIRONMENT: SEA-DEV
-  APP_ENV: dev
-   
+  APP_ENV: dev 
+ 
+on:
+  workflow_dispatch: 
+ 
 jobs:
   build:
     runs-on: ubuntu-latest
