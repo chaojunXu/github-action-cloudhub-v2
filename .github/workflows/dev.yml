@@ -2,11 +2,15 @@ name: Build and Deploy to SEA-DEV
 
 on:
  workflow_dispatch:
+ 
+env:
+  environment: SEA-DEV
+  app_env: dev
   
 jobs:
   build:
     runs-on: ubuntu-latest
-    environment: SEA-DEV
+    environment: ${{ env.environment }
     steps:
     - name: Checkout this repo
       uses: actions/checkout@v3
@@ -33,13 +37,13 @@ jobs:
       run: |
         mvn deploy  --settings .maven/settings.xml -e \
                    -Ddeploy.encryption.key=$KEY \
-                   -Ddeploy.app.env=dev 
+                   -Ddeploy.app.env=${{ env.app_env } 
 
     
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    environment: SEA-DEV
+    environment: ${{ env.environment }
     steps:    
     - name: Checkout this repo
       uses: actions/checkout@v3
@@ -73,5 +77,5 @@ jobs:
                     -Ddeploy.replicas=$REPLICAS \
                     -Ddeploy.vCores=$VCORES \
                     -Ddeploy.encryption.key=$KEY \
-                    -Ddeploy.app.env=dev \
+                    -Ddeploy.app.env=${{ env.app_env } \
                     -Ddeploy.country=th

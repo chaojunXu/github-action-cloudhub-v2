@@ -152,17 +152,17 @@
 			<classifier>mule-plugin</classifier>
 		</dependency>
 		<dependency>
-			<groupId>org.mule.modules</groupId>
-			<artifactId>mule-apikit-module</artifactId>
-			<version>1.8.2</version>
-			<classifier>mule-plugin</classifier>
-		</dependency>
-		<dependency>
 			<groupId>9bcea059-147d-47a3-9c05-e691c72d1f41</groupId>
 			<artifactId>lazada-order-sys-api</artifactId>
 			<version>1.0.1</version>
 			<classifier>raml</classifier>
 			<type>zip</type>
+		</dependency>
+		<dependency>
+			<groupId>org.mule.modules</groupId>
+			<artifactId>mule-apikit-module</artifactId>
+			<version>1.8.3</version>
+			<classifier>mule-plugin</classifier>
 		</dependency>
 	</dependencies>
 
